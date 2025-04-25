@@ -27,10 +27,10 @@ public class User {
 	private String password;
 	
 	@Column(name = "first_name", length = 45, nullable = false)
-	private String firstname;
+	private String firstName;
 	
 	@Column(name = "last_name",length = 45, nullable = false)
-	private String lastname;
+	private String lastName;
 	
 	@Column(length = 64)
 	private String photos;
@@ -54,8 +54,8 @@ public class User {
 	public User(String email, String password, String firstname, String lastname) {
 		this.email = email;
 		this.password = password;
-		this.firstname = firstname;
-		this.lastname = lastname;
+		this.firstName = firstname;
+		this.lastName = lastname;
 	}
 
 	public Integer getId() {
@@ -82,20 +82,20 @@ public class User {
 		this.password = password;
 	}
 
-	public String getFirstname() {
-		return firstname;
+	public String getFirstName() {
+		return firstName;
 	}
 
-	public void setFirstname(String firstname) {
-		this.firstname = firstname;
+	public void setFirstName(String firstname) {
+		this.firstName = firstname;
 	}
 
-	public String getLastname() {
-		return lastname;
+	public String getLastName() {
+		return lastName;
 	}
 
-	public void setLastname(String lastname) {
-		this.lastname = lastname;
+	public void setLastName(String lastname) {
+		this.lastName = lastname;
 	}
 
 	public String getPhotos() {
@@ -128,7 +128,7 @@ public class User {
 
 	@Override
 	public String toString() {
-		return "User [id=" + id + ", email=" + email + ", firstname=" + firstname + ", lastname=" + lastname
+		return "User [id=" + id + ", email=" + email + ", firstname=" + firstName + ", lastname=" + lastName
 				+ ", roles=" + roles + "]";
 	}
 	

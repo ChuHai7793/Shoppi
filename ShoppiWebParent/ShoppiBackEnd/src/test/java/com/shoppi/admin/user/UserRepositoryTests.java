@@ -26,8 +26,8 @@ public class UserRepositoryTests {
 	
 	@Test
 	public void testCreateNewUserWithOneRole() {
-		Role roleAdmin = entityManager.find(Role.class, 2);
-		User userTest = new User("testUser@gmail.com","12345","Nam","Le");
+		Role roleAdmin = entityManager.find(Role.class, 1);
+		User userTest = new User("tuan@gmail.com","12345","Tuan","Le");
 		userTest.addRole(roleAdmin);
 		
 		User savedUser = repo.save(userTest);
@@ -38,7 +38,7 @@ public class UserRepositoryTests {
 	@Test
 	public void testCreateNewUserWithTwoRoles() {
 		
-		User userTuan = new User("tuan@gmail.com","12345","Tuan","Chu");
+		User userTuan = new User("hai@gmail.com","12345","Hai","Chu");
 		Role roleEditor = new Role(4);
 		Role roleAssistant = new Role(6);
 	
