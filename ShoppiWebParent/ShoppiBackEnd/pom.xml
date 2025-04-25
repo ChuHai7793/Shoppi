@@ -30,6 +30,11 @@
 	
 
 	<dependencies>
+	<dependency>
+		<groupId>com.shoppi</groupId>
+		<artifactId>ShoppiCommon</artifactId>
+		<version>0.0.1-SNAPSHOT</version>
+	</dependency>
 	</dependencies>
 
 	<build>
