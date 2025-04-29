@@ -3,15 +3,16 @@ package com.shoppi.admin.user;
 import java.util.List;
 import java.util.NoSuchElementException;
 
-import org.springframework.beans.factory.annotation.Autowired;import org.springframework.data.repository.query.Param;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.shoppi.common.entity.Role;
 import com.shoppi.common.entity.User;
 
 @Service
+@Transactional
 public class UserService {
 	
 	@Autowired
@@ -88,4 +89,8 @@ public class UserService {
 		}
 		userRepo.deleteById(id);
 		}
+	
+	public void updateUserEnabledStatus(Integer id, boolean enabled) {
+		userRepo.updateEnabledStatus(id, enabled);
+	}
 }
