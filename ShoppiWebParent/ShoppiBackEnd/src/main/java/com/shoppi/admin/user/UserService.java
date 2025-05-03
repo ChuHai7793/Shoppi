@@ -29,8 +29,11 @@ public class UserService {
 	@Autowired
 	private PasswordEncoder passwordEncoder;
 	
-	public List<User> listAll(){
-		return (List<User>) userRepo.findAll();
+//	public List<User> listAll(){
+//		return (List<User>) userRepo.findAll();
+//	}
+	public List<User> listAll() {
+		return (List<User>) userRepo.findAll(Sort.by("firstName").ascending());
 	}
 	
 	public Page<User> listByPage(int pageNum, String sortField, String sortDir, String keyword) {

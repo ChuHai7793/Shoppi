@@ -22,6 +22,8 @@ import com.shoppi.admin.FileUploadUtil;
 import com.shoppi.common.entity.Role;
 import com.shoppi.common.entity.User;
 
+import jakarta.servlet.http.HttpServletResponse;
+
 @Controller
 public class UserController {
 
@@ -36,6 +38,7 @@ public class UserController {
 //		model.addAttribute("listUsers",listUsers);
 //		return "users";
 //	}
+	
 	
 	@GetMapping("/users")
 	public String listFirstPage(Model model) {
@@ -159,5 +162,29 @@ public class UserController {
 		redirectAttributes.addFlashAttribute("message", message);
 		
 		return "redirect:/users";
+	}
+	
+	@GetMapping("/users/export/csv")
+	public void exportToCSV(HttpServletResponse response) throws IOException {
+		List<User> listUsers = service.listAll();
+		UserCsvExporter exporter = new UserCsvExporter();
+		exporter.export(listUsers, response);
+	}
+	
+	@GetMapping("/users/export/excel")
+	public void exportToExcel(HttpServletResponse response) throws IOException {
+		List<User> listUsers = service.listAll();
+		
+		UserExcelExporter exporter = new UserExcelExporter();
+		exporter.export(listUsers, response);
+	}
+	
+	
+	@GetMapping("/users/export/pdf")
+	public void exportToPDF(HttpServletResponse response) throws IOException {
+		List<User> listUsers = service.listAll();
+		
+		UserPdfExporter exporter = new UserPdfExporter();
+		exporter.export(listUsers, response);
 	}
 }
