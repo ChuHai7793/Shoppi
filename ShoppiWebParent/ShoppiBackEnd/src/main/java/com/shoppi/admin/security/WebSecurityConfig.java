@@ -53,17 +53,23 @@ public class WebSecurityConfig {
                    .build();
     }
 	
-	@Bean
-	SecurityFilterChain configureHttpSecurity(HttpSecurity http) throws Exception {
-	    http.authorizeHttpRequests(authorize -> authorize.anyRequest().authenticated()
-           )
-           .formLogin(form -> form
-               .loginPage("/login")
-               .usernameParameter("email")
-               .permitAll()
-           );
-		return http.build();
-	}
+    @Bean
+    public SecurityFilterChain configureHttpSecurity(HttpSecurity http) throws Exception {
+        http
+            .authorizeHttpRequests(authorize -> authorize
+                .anyRequest().authenticated()
+            )
+            .formLogin(form -> form
+                .loginPage("/login")
+                .usernameParameter("email")
+                .permitAll()
+            )
+            .logout(logout -> logout
+                .permitAll()
+            );
+
+        return http.build();
+    }
 	
 
     @Bean
