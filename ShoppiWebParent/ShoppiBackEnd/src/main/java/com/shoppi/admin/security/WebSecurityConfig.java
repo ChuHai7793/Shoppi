@@ -53,28 +53,27 @@ public class WebSecurityConfig {
                    .build();
     }
 	
-    @Bean
-    public SecurityFilterChain configureHttpSecurity(HttpSecurity http) throws Exception {
-        http
-            .authorizeHttpRequests(authorize -> authorize
-                .anyRequest().authenticated()
-            )
-            .formLogin(form -> form
-                .loginPage("/login")
-                .usernameParameter("email")
-                .permitAll()
-            )
-            .logout(logout -> logout
-                .permitAll()
-            )
-            .rememberMe(rememberMe -> rememberMe
-                    .key("AbcDefgHijKlmnOpqrs_1234567890") // Key bí mật dùng để mã hóa token
-                    .tokenValiditySeconds(7 * 24 * 60 * 60) // Token tồn tại trong 7 ngày
-                )
-			;
+	@Bean
+	SecurityFilterChain configureHttp(HttpSecurity http) throws Exception {
+		http.authenticationProvider(authenticationProvider());
 
-        return http.build();
-    }
+		http.authorizeHttpRequests(auth -> auth
+				.requestMatchers("/users/**").hasAuthority("Admin")
+				.anyRequest().authenticated()
+			)
+			.formLogin(form -> form
+				.loginPage("/login")
+				.usernameParameter("email")
+				.permitAll())
+
+			.logout(logout -> logout.permitAll())
+
+			.rememberMe(rem -> rem
+					.key("AbcDefgHijKlmnOpqrs_1234567890")
+					.tokenValiditySeconds(7 * 24 * 60 * 60));
+
+			return http.build();
+	}
 	
 
     @Bean

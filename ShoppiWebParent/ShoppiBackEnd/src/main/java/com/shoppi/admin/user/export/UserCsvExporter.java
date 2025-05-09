@@ -1,4 +1,4 @@
-package com.shoppi.admin.user;
+package com.shoppi.admin.user.export;
 
 import java.io.IOException;
 import java.util.List;

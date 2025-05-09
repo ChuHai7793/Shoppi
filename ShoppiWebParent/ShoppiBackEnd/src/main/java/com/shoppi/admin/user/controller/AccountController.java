@@ -1,4 +1,4 @@
-package com.shoppi.admin.user;
+package com.shoppi.admin.user.controller;
 
 import java.io.IOException;
 
@@ -15,6 +15,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.shoppi.admin.FileUploadUtil;
 import com.shoppi.admin.security.ShoppiUserDetails;
+import com.shoppi.admin.user.UserService;
 import com.shoppi.common.entity.User;
 
 @Controller
@@ -30,7 +31,7 @@ public class AccountController {
 		User user = service.getByEmail(email);
 		model.addAttribute("user", user);
 		
-		return "account_form";
+		return "users/account_form";
 		
 	}
 	

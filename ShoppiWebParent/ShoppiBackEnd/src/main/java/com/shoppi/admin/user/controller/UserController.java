@@ -1,4 +1,4 @@
-package com.shoppi.admin.user;
+package com.shoppi.admin.user.controller;
 
 
 
@@ -19,6 +19,11 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.shoppi.admin.FileUploadUtil;
+import com.shoppi.admin.user.UserNotFoundException;
+import com.shoppi.admin.user.UserService;
+import com.shoppi.admin.user.export.UserCsvExporter;
+import com.shoppi.admin.user.export.UserExcelExporter;
+import com.shoppi.admin.user.export.UserPdfExporter;
 import com.shoppi.common.entity.Role;
 import com.shoppi.common.entity.User;
 
@@ -77,7 +82,7 @@ public class UserController {
 		model.addAttribute("reverseSortDir", reverseSortDir);
 		model.addAttribute("keyword", keyword);
 		
-		return "users";		
+		return "users/users";		
 	}
 	
 	
@@ -91,7 +96,7 @@ public class UserController {
 		model.addAttribute("listRoles",listRoles);
 		model.addAttribute("pageTitle","Create New User");
 
-		return "user_form";
+		return "users/user_form";
 	}
 	
 	@PostMapping("/users/save")
@@ -129,7 +134,7 @@ public class UserController {
 			model.addAttribute("user",user);
 			model.addAttribute("pageTitle","Edit User (ID: "+id+")");
 			model.addAttribute("listRoles",listRoles);
-			return "user_form";
+			return "users/user_form";
 					
 		} catch (UserNotFoundException ex) {
 			redirectAttribute.addFlashAttribute("message",ex.getMessage());
