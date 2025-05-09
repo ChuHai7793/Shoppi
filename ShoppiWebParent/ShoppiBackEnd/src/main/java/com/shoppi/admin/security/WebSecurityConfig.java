@@ -66,7 +66,12 @@ public class WebSecurityConfig {
             )
             .logout(logout -> logout
                 .permitAll()
-            );
+            )
+            .rememberMe(rememberMe -> rememberMe
+                    .key("AbcDefgHijKlmnOpqrs_1234567890") // Key bí mật dùng để mã hóa token
+                    .tokenValiditySeconds(7 * 24 * 60 * 60) // Token tồn tại trong 7 ngày
+                )
+			;
 
         return http.build();
     }
