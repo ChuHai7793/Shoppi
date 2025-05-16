@@ -9,9 +9,10 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
+import jakarta.persistence.Transient;
 
 @Entity
 @Table(name = "categories")
@@ -31,7 +32,7 @@ public class Category {
 	
 	private boolean enabled;
 	
-	@ManyToOne
+	@OneToOne
 	@JoinColumn(name = "parent_id")
 	private Category parent;
 	
@@ -45,6 +46,39 @@ public class Category {
 		this.id = id;
 	}
 
+	public static Category copyIdAndName(Category category) {
+		Category copyCategory = new Category();
+		copyCategory.setId(category.getId());
+		copyCategory.setName(category.getName());
+		
+		return copyCategory;
+	}
+
+	public static Category copyIdAndName(Integer id, String name) {
+		Category copyCategory = new Category();
+		copyCategory.setId(id);
+		copyCategory.setName(name);
+		
+		return copyCategory;
+	}
+	
+	public static Category copyFull(Category category) {
+		Category copyCategory = new Category();
+		copyCategory.setId(category.getId());
+		copyCategory.setName(category.getName());
+		copyCategory.setImage(category.getImage());
+		copyCategory.setAlias(category.getAlias());
+		copyCategory.setEnabled(category.isEnabled());
+		
+		return copyCategory;		
+	}
+	public static Category copyFull(Category category, String name) {
+		Category copyCategory = Category.copyFull(category);
+		copyCategory.setName(name);
+		
+		return copyCategory;
+	}
+	
 	public Category(String name) {
 		this.name = name;
 		this.alias = name;
@@ -111,14 +145,11 @@ public class Category {
 	public void setChildren(Set<Category> children) {
 		this.children = children;
 	}
-
-	@Override
-	public String toString() {
-		return "Category [id=" + id + ", name=" + name + ", alias=" + alias + ", image=" + image + ", enabled="
-				+ enabled + ", parent=" + parent + ", children=" + children + "]";
+	
+	@Transient
+	public String getImagePath() {
+		return "/category-images/" + this.id + "/" + this.image;
 	}
-	
-	
 	
 	
 }
